@@ -2,3 +2,4 @@
 docker-compose.yml
 maceioin_db
 .venv
+*.pyc
