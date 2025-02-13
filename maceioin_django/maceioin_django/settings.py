@@ -66,7 +66,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3307",
-    "https://cf98-2804-29b8-5135-9d80-2f46-1dd6-3ce8-c50.ngrok-free.app"
+    config('CORS_ALLOWED_ORIGIN'),
 ]
 
 ROOT_URLCONF = 'maceioin_django.urls'
