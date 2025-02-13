@@ -1,140 +1,161 @@
 <template>
-    <div class="user-management">
+  <UserManagementHeader />
+  <div class="user-management">
+    <div class="title-button">
       <h2>Cadastro de Pessoas</h2>
-      <form @submit.prevent="addUser">
-        <div>
-          <label for="name">Nome:</label>
-          <input type="text" id="name" v-model="newUser.name" required />
-        </div>
-        <div>
-          <label for="sector">Setor:</label>
-          <select id="sector" v-model="newUser.sector" required>
-            <option>Contabilidade</option>
-            <option>Financeiro</option>
-            <option>Atendimento</option>
-            <option>Orçamento</option>
-            <option>TI</option>
-          </select>
-        </div>
-        <div>
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" v-model="newUser.email" required />
-        </div>
-        <button type="submit">Adicionar</button>
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Setor</th>
-            <th>E-mail</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in users" :key="index">
-            <td>{{ user.name }}</td>
-            <td>{{ user.sector }}</td>
-            <td>{{ user.email }}</td>
-            <td>
-              <button @click="editUser(index)">Editar</button>
-              <button @click="deleteUser(index)">Excluir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <button @click="openAddUserModal" class="add-user-btn">
+        <Icon icon="akar-icons:plus" class="add-icon" /> Adicionar Usuário
+      </button>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        newUser: {
-          name: '',
-          sector: '',
-          email: ''
-        },
-        users: []
-      };
+    
+    <UserTable :users="users" @edit="openEditModal" @delete="handleDeleteUser" />
+
+    <UserFormModal :visible="showAddUserModal" :user="newUser" title="Adicionar Usuário" buttonText="Adicionar" @submit="handleAddUser" @close="closeAddUserModal" />
+    <UserFormModal :visible="showEditUserModal" :user="editingUser" title="Editar Usuário" buttonText="Salvar" @submit="handleUpdateUser" @close="closeEditModal" />
+  </div>
+  <PageFooter />
+</template>
+
+<script>
+import { Icon } from '@iconify/vue';
+import UserFormModal from "../components/UserFormModal.vue";
+import UserTable from "../components/UserTable.vue";
+import UserManagementHeader from "../components/UserManagementHeader.vue";
+import PageFooter from "../components/PageFooter.vue";
+import { addUser } from "../composables/addUser";
+import { editUser } from "../composables/editUser";
+import { deleteUser } from "../composables/deleteUser";
+import { fetchUsers } from "../composables/getUser";
+import { useToast } from 'vue-toastification';
+
+export default {
+  components: { Icon, UserFormModal, UserTable, UserManagementHeader, PageFooter },
+  data() {
+    return {
+      newUser: { name: "", username: "", sector: "", email: "" },
+      users: [],
+      showAddUserModal: false,
+      showEditUserModal: false,
+      editingUserIndex: null,
+      editingUser: { name: "", username: "", sector: "", email: "" },
+      lastToastMessage: ''
+    };
+  },
+  methods: {
+    openAddUserModal() {
+      this.showAddUserModal = true;
     },
-    methods: {
-      addUser() {
-        this.users.push({ ...this.newUser });
-        this.newUser.name = '';
-        this.newUser.sector = '';
-        this.newUser.email = '';
-      },
-      editUser(index) {
-        const user = this.users[index];
-        this.newUser = { ...user };
-        this.users.splice(index, 1);
-      },
-      deleteUser(index) {
-        this.users.splice(index, 1);
+    closeAddUserModal() {
+      this.showAddUserModal = false;
+    },
+    async handleAddUser(user) {
+      try {
+        await addUser(user);
+        this.handleFetchUsers();
+        this.closeAddUserModal();
+        this.showToast('Usuário adicionado com sucesso!');
+      } catch (error) {
+        this.showToast('Erro ao adicionar usuário.');
+      }
+    },
+    openEditModal(index) {
+      this.editingUserIndex = index;
+      this.editingUser = { ...this.users[index] };
+      this.showEditUserModal = true;
+    },
+    async handleUpdateUser(updatedUser) {
+      try {
+        await editUser(this.users[this.editingUserIndex].id, updatedUser);
+        this.users.splice(this.editingUserIndex, 1, updatedUser);
+        this.closeEditModal();
+        this.handleFetchUsers();
+        this.showToast('Usuário atualizado com sucesso!');
+      } catch (error) {
+        this.showToast('Erro ao atualizar usuário.');
+      }
+    },
+    async handleDeleteUser(index) {
+      try {
+        await deleteUser(this.users[index].id);
+        this.handleFetchUsers();
+        this.showToast('Usuário deletado com sucesso!');
+      } catch (error) {
+        this.showToast('Erro ao deletar usuário.');
+      }
+    },
+    closeEditModal() {
+      this.showEditUserModal = false;
+      this.editingUser = { name: "", username: "", sector: "", email: "" };
+    },
+    async handleFetchUsers() {
+      this.users = await fetchUsers();
+    },
+    showToast(message) {
+      if (this.lastToastMessage !== message) {
+        this.toast.success(message);
+        this.lastToastMessage = message;
       }
     }
-  };
-  </script>
-  
-  <style scoped>
-  .user-management {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  },
+  mounted() {
+    this.handleFetchUsers();
+  },
+  setup() {
+    const toast = useToast();
+    return { toast };
   }
-  
-  .user-management h2 {
-    margin-bottom: 20px;
-  }
-  
-  .user-management form div {
-    margin-bottom: 10px;
-  }
-  
-  .user-management label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .user-management input,
-  .user-management select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  .user-management button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .user-management button:hover {
-    background-color: #0056b3;
-  }
-  
-  .user-management table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .user-management table th,
-  .user-management table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .user-management table th {
-    background-color: #007BFF;
-    color: #fff;
-  }
-  </style>
+};
+</script>
+
+<style scoped>
+.title-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-management {
+  max-width: 700px; 
+  margin: 50px auto; 
+  padding: 20px;
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 { 
+  color: #333; 
+  text-align: center; 
+}
+
+.add-user-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background-color: #4e72e6;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-user-btn:hover {
+  background-color: #354d9b;
+}
+
+.add-icon {
+  font-size: 1rem;
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .user-management{
+    margin: 1rem;
+    margin-top: 8rem;
+}
+}
+</style>
