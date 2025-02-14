@@ -1,0 +1,11 @@
+services:
+  mysql_db:
+    image: mysql:8.0
+    volumes:
+      - ./MaceioIN_Database:/var/lib/mysql
+    container_name: MaceioIN_MySQL
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
