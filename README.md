@@ -49,11 +49,6 @@ MaceioIN é uma aplicação FullStack composta por um frontend em Vue.js e um ba
     npm run serve
     ```
 
-4. Para compilar e minificar para produção:
-    ```sh
-    npm run build
-    ```
-
 ### Configuração do Backend (Django)
 
 1. Navegue até o diretório `maceioin_django`:
@@ -69,7 +64,7 @@ MaceioIN é uma aplicação FullStack composta por um frontend em Vue.js e um ba
 
 3. Instale as dependências do projeto:
     ```sh
-    pip install -r requirements.txt
+    pip install -r ../requirements.txt
     ```
 
 4. Configure as variáveis de ambiente copiando o arquivo `.env_example` para `.env` e preenchendo os valores necessários:
