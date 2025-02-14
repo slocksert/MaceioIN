@@ -110,14 +110,13 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': config('NAME', default='MaceioIN'),
-            'USER': config('USER', default='root'),
-            'PASSWORD': config('PASSWORD', default='root'),
-            'HOST': config('HOST', default='195.200.0.138'),
-            'PORT': config('PORT', default='3306'),
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD': config('PASSWORD'),
+            'HOST': config('HOST'),
+            'PORT': config('PORT'),
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
