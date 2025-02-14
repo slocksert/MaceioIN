@@ -22,14 +22,21 @@
   </script>
   
   <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
   #sefaz {
     font-weight: bold;
   }
   
   .about-sefaz {
     text-align: center;
-    padding: 0.2rem;
+    padding: 2rem;
     background: #f8f9fa;
+    font-family: Roboto, sans-serif;
+  }
+
+  .about-sefaz p{
+    text-align: justify;
   }
   
   .logo-sefaz {

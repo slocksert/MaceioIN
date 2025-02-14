@@ -46,7 +46,7 @@ export default {
     async login() {
       const toast = useToast();
       try {
-        const response = await axios.post("https://djangoapi.slocksert.dev//login/", {
+        const response = await axios.post("https://djangoapi.slocksert.dev/login/", {
           username: this.username,
           password: this.password,
         });
@@ -58,9 +58,13 @@ export default {
           this.$router.push("/admin");
         }
       } catch (error) {
-        toast.error(
-          "Falha no login: " + (error.response?.data?.detail || "Erro desconhecido")
-        );
+        if (error.response && error.response.status === 401) {
+          toast.error("Usuário ou senha inválidos.");
+        } else {
+          toast.error(
+            "Falha no login: Erro de conexão com o servidor. Tente novamente mais tarde."
+          );
+        }
       }
     },
   },
@@ -75,7 +79,7 @@ export default {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  padding: 0;
+  padding: 2rem;
   box-sizing: border-box;
 }
 

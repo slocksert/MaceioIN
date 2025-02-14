@@ -2,7 +2,7 @@
   <div class="landing-page">
     <PageHeader />
     <main class="main-content">
-      <HeroSection />
+      <IntroSection />
       <AboutSefazSection />
       <SefazActivitiesSection />
     </main>
@@ -13,7 +13,7 @@
 <script>
 import PageHeader from '../components/PageHeader.vue';
 import PageFooter from '../components/PageFooter.vue';
-import HeroSection from '../components/IntroSection.vue';
+import IntroSection from '../components/IntroSection.vue';
 import AboutSefazSection from '../components/AboutSefaz.vue';
 import SefazActivitiesSection from '../components/SefazActivities.vue';
 
@@ -21,7 +21,7 @@ export default {
   components: {
     PageHeader,
     PageFooter,
-    HeroSection,
+    IntroSection,
     AboutSefazSection,
     SefazActivitiesSection
   }

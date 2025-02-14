@@ -60,4 +60,4 @@ def login_user(request):
             'access': str(refresh.access_token),
         }, status=200)
     else:
-        return Response({'error': 'Invalid credentials'}, status=400)
+        return Response({'error': 'Invalid credentials'}, status=401)
