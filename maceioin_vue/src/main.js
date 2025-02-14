@@ -8,7 +8,12 @@ import PageHeader from './components/PageHeader.vue';
 import PageFooter from './components/PageFooter.vue';
 import LoginForm from './components/LoginForm.vue';
 import useToast from './toast.js';
+import { OhVueIcon, addIcons } from 'oh-vue-icons';
+import { CoLockLocked } from 'oh-vue-icons/icons';
+import { CoUser } from "oh-vue-icons/icons";
 
+addIcons(CoLockLocked);
+addIcons(CoUser);
 
 const routes = [
   { path: '/', component: LandingPage },
@@ -34,6 +39,7 @@ const router = createRouter({
 
 const app = createApp(App);
 
+app.component('v-icon', OhVueIcon);
 app.component('PageHeader', PageHeader);
 app.component('PageFooter', PageFooter);
 app.component('LoginForm', LoginForm);

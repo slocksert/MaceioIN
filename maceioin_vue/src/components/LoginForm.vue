@@ -6,14 +6,20 @@
       </router-link>
     </header>
     <div class="login-card">
-      <h2>Bem vindo</h2>
+      <h2>Bem-vindo</h2>
       <form @submit.prevent="login">
         <div class="input-group">
-          <label for="username">Usuário:</label>
+          <div class="username">
+            <v-icon name="co-user" />
+            <label for="username">Usuário:</label>
+          </div>
           <input type="text" id="username" v-model="username" required />
         </div>
         <div class="input-group">
-          <label for="password">Senha:</label>
+          <div class="password">
+            <v-icon name="co-lock-locked" />
+            <label for="password">Senha:</label>
+          </div>
           <input type="password" id="password" v-model="password" required />
         </div>
         <div class="btn-container">
@@ -83,6 +89,13 @@ export default {
   box-sizing: border-box;
 }
 
+.password {
+  display: flex;
+}
+
+.username {
+  display: flex;
+}
 
 .header {
   position: absolute;
@@ -121,7 +134,7 @@ export default {
 h2 {
   margin-bottom: 1.5rem;
   color: #333;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .input-group {
