@@ -98,22 +98,23 @@ WSGI_APPLICATION = 'maceioin_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if config('USE_MYSQL', default=False, cast=bool):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': config('NAME'),
-            'USER': config('USER'),
-            'PASSWORD': config('PASSWORD'),
-            'HOST': config('HOST'),
-            'PORT': config('PORT'),
-        }
-    }
-else:
+if config('USE_SQLITE', default=False, cast=bool):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('NAME', default='MaceioIN'),
+            'USER': config('USER', default='root'),
+            'PASSWORD': config('PASSWORD', default='root'),
+            'HOST': config('HOST', default='195.200.0.138'),
+            'PORT': config('PORT', default='3306'),
         }
     }
 
