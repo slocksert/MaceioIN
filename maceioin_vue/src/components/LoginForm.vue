@@ -9,18 +9,24 @@
       <h2>Bem-vindo</h2>
       <form @submit.prevent="login">
         <div class="input-group">
-          <div class="username">
-            <v-icon name="co-user" />
-            <label for="username">Usuário:</label>
-          </div>
-          <input type="text" id="username" v-model="username" required />
+          <v-icon name="co-user" class="input-icon" />
+          <input
+            type="text"
+            id="username"
+            v-model="username"
+            placeholder="Usuário"
+            required
+          />
         </div>
         <div class="input-group">
-          <div class="password">
-            <v-icon name="co-lock-locked" />
-            <label for="password">Senha:</label>
-          </div>
-          <input type="password" id="password" v-model="password" required />
+          <v-icon name="co-lock-locked" class="input-icon" />
+          <input
+            type="password"
+            id="password"
+            v-model="password"
+            placeholder="Senha"
+            required
+          />
         </div>
         <div class="btn-container">
           <button type="submit" class="btn-login">Entrar</button>
@@ -29,6 +35,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -89,14 +96,6 @@ export default {
   box-sizing: border-box;
 }
 
-.password {
-  display: flex;
-}
-
-.username {
-  display: flex;
-}
-
 .header {
   position: absolute;
   top: 1rem;
@@ -107,7 +106,6 @@ export default {
   max-width: 100%;
   height: auto;
 }
-
 
 .login-card {
   background: #fff;
@@ -134,27 +132,25 @@ export default {
 h2 {
   margin-bottom: 1.5rem;
   color: #333;
-  font-family: 'Roboto', sans-serif;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-.input-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #555;
   font-family: 'Poppins', sans-serif;
 }
 
-.input-group input {
+.input-group {
+  position: relative;
   width: 75%;
+  margin: 0 auto 1.5rem;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.input-group input {
+  width: 50%;
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -163,15 +159,8 @@ h2 {
 }
 
 .input-group input:focus {
-  border-color: #5563DE;
+  border-color: #5563de;
   outline: none;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .btn-container {
@@ -183,7 +172,7 @@ form {
 .btn-login {
   width: 75%;
   padding: 0.75rem;
-  background-color: #5563DE;
+  background-color: #5563de;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -195,5 +184,11 @@ form {
 .btn-login:hover {
   background-color: #3d46b1;
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .input-icon {
+    left: 2px;
+  }
 }
 </style>

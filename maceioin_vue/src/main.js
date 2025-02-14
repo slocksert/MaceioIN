@@ -11,9 +11,11 @@ import useToast from './toast.js';
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
 import { CoLockLocked } from 'oh-vue-icons/icons';
 import { CoUser } from "oh-vue-icons/icons";
+import { CoAccountLogout } from "oh-vue-icons/icons";
 
 addIcons(CoLockLocked);
 addIcons(CoUser);
+addIcons(CoAccountLogout);
 
 const routes = [
   { path: '/', component: LandingPage },

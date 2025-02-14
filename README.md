@@ -84,28 +84,4 @@ MaceioIN é uma aplicação FullStack composta por um frontend em Vue.js e um ba
     python manage.py runserver
     ```
 
-### Usando MySQL com Docker Compose
-
-1. Certifique-se de que o Docker e o Docker Compose estão instalados.
-
-2. No diretório raiz do projeto, execute o comando:
-    ```sh
-    docker-compose up -d
-    ```
-
-3. Configure as variáveis de ambiente no arquivo `.env` para usar o MySQL:
-    ```env
-    USE_MYSQL=True
-    NAME=MaceioIN
-    USER=root
-    PASSWORD=root
-    HOST=mysql_db
-    PORT=3306
-    ```
-
-4. Execute as migrações do banco de dados:
-    ```sh
-    python manage.py migrate
-    ```
-
-5. Acesse a aplicação no navegador em `http://localhost:3307`.
+7. Acesse a aplicação no navegador em `http://localhost:3307`.
