@@ -2,7 +2,10 @@
 
 Desafio para vaga de estágio FullStack
 
-### O desafio também está hospeado em [maceioin.slocksert.dev](https://maceioin.slocksert.dev).
+### O desafio está hospeado em [maceioin.slocksert.dev](https://maceioin.slocksert.dev).
+
+    Usuário: admin
+    Senha: admin
 
 ## Visão Geral
 
