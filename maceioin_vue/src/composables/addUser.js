@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function addUser(newUser) {
   try {
-    const response = await axios.post('http://localhost:8000/add/', newUser, {
+    const response = await axios.post('https://djangoapi.slocksert.dev/add/', newUser, {
       headers: {
         'Content-Type': 'application/json'
       }

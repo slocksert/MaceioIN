@@ -5,10 +5,6 @@
       <input type="text" id="name" v-model="localUser.name" required />
     </div>
     <div>
-      <label for="username">Usuário:</label>
-      <input type="text" id="username" v-model="localUser.username" required />
-    </div>
-    <div>
       <label for="sector">Setor:</label>
       <select id="sector" v-model="localUser.sector" required>
         <option>Contabilidade</option>

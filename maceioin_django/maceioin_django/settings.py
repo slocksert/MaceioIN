@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -66,8 +66,13 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3307",
-    config('CORS_ALLOWED_ORIGIN'),
+    'https://maceioin.slocksert.dev'
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://maceioin.slocksert.dev',
+]
+
 
 ROOT_URLCONF = 'maceioin_django.urls'
 

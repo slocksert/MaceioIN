@@ -46,7 +46,7 @@ export default {
     async login() {
       const toast = useToast();
       try {
-        const response = await axios.post("http://localhost:8000/login/", {
+        const response = await axios.post("https://djangoapi.slocksert.dev//login/", {
           username: this.username,
           password: this.password,
         });

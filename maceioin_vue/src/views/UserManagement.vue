@@ -4,7 +4,7 @@
     <div class="title-button">
       <h2>Cadastro de Pessoas</h2>
       <button @click="openAddUserModal" class="add-user-btn">
-        <Icon icon="akar-icons:plus" class="add-icon" /> Adicionar Usuário
+      <Icon icon="akar-icons:plus" class="add-icon" /> Adicionar Usuário
       </button>
     </div>
     
@@ -112,12 +112,13 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .user-management {
   max-width: 700px; 
   margin: 50px auto; 
-  padding: 20px;
+  padding: 2.5rem;
   background-color: #fff; 
   border-radius: 8px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

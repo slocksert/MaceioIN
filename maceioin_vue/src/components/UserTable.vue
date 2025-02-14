@@ -4,7 +4,6 @@
       <thead>
         <tr>
           <th>Nome</th>
-          <th>Usuário</th>
           <th>Setor</th>
           <th>E-mail</th>
           <th>Ações</th>
@@ -13,7 +12,6 @@
       <tbody>
         <tr v-for="(user, index) in users" :key="index">
           <td>{{ user.name }}</td>
-          <td>{{ user.username }}</td>
           <td>{{ user.sector }}</td>
           <td>{{ user.email }}</td>
           <td class="actions">
