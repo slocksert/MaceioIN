@@ -48,7 +48,7 @@
   .about-sefaz h2 {
     color: #007BFF;
     margin-bottom: 15px;
-    font-weight: lighter;
+    font-weight: 400;
   }
   
   .about-sefaz p {
